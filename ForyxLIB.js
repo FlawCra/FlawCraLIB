@@ -25,6 +25,6 @@ var ForyxLIB = {};
 		var Difference_In_Time = nowDate.getTime() - joinDate.getTime();
 		var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
 		var tweetsADay = Math.round(tweetCount / Difference_In_Days);
-		alert("Joined: '"+joinDate+"' Tweets: '"+tweetCount+"' Tweets a Day: '"+tweetsADay+"'");
+		return tweetsADay;
 	}
 })(ForyxLIB);
