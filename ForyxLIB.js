@@ -13,7 +13,7 @@ var ForyxLIB = {};
 	    });
 	  };
 	};
-	var SCCID = "8df0d68fcc1920c92fc389b89e7ce20f";
+	var SCCID = "OZgpQPzKR8IgDAWHMu26NakbuNEqKVGZ";
 	ForyxLIB.resolveSoundcloudSong = function (songURL){
 		$.get( "https://api.soundcloud.com/resolve/?url="+songURL+"&client_id="+SCCID, function( data ) {
 		  console.log(JSON.parse(JSON.stringify(data)).stream_url+"?client_id="+SCCID);
