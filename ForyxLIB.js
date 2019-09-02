@@ -19,4 +19,12 @@ var ForyxLIB = {};
 		  console.log(JSON.parse(JSON.stringify(data)).stream_url+"?client_id="+SCCID);
 		});
 	}
+	ForyxLIB.calcTweetsADay = function(joinYear, joinMonth, tweetCount) {
+		var joinDate = new Date(joinYear,joinMonth);
+		var nowDate = new Date();
+		var Difference_In_Time = nowDate.getTime() - joinDate.getTime();
+		var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+		var tweetsADay = Math.round(tweetCount / Difference_In_Days);
+		alert("Joined: '"+joinDate+"' Tweets: '"+tweetCount+"' Tweets a Day: '"+tweetsADay+"'");
+	}
 })(ForyxLIB);
