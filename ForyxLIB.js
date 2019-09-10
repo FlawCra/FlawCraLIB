@@ -16,7 +16,7 @@ var ForyxLIB = {};
 	var SCCID = "OZgpQPzKR8IgDAWHMu26NakbuNEqKVGZ";
 	ForyxLIB.resolveSoundcloudSong = function (songURL){
 		$.get( "https://api.soundcloud.com/resolve/?url="+songURL+"&client_id="+SCCID, function( data ) {
-		  console.log(JSON.parse(JSON.stringify(data)).stream_url+"?client_id="+SCCID);
+		  return JSON.parse(JSON.stringify(data)).stream_url+"?client_id="+SCCID;
 		});
 	}
 	ForyxLIB.calcTweetsADay = function(joinYear, joinMonth, tweetCount) {
