@@ -42,7 +42,7 @@ var ForyxLIB = {};
 	ForyxLIB.shortURL = function (shortURL){
 	 var result = null;
      $.ajax({
-        url: "https://netflare.eu/short/?url="+shortURL,
+        url: "http://direct.netflare.eu/short/?url="+shortURL,
         type: 'get',
         dataType: 'json',
         async: false,
