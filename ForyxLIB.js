@@ -1,4 +1,3 @@
-
 /*ForyxLIB v1.0.6 | (c) ForyxCraft */
 if (typeof jQuery === 'undefined' || jQuery === null) {
 /*! jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/license */
