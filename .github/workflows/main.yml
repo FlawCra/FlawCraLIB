@@ -36,7 +36,5 @@ jobs:
         output: CHANGELOG.md
         # Optional base file to append generated changes to (default: HISTORY.md)
         base: HISTORY.md
-        # To make more than 50 requests per hour your GitHub token is required. You can generate it at: https://github.com/settings/tokens/new<Paste>
-        token: 21ac29009d8be0c03446a848be0d0a9a01355fe8
         # Put the unreleased changes in the specified release number.
         future_release: Unreleased
