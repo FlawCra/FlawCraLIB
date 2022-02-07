@@ -27,9 +27,9 @@ jobs:
       uses: CharMixer/auto-changelog-action@v1.1
       with:
         # Username of the owner of target GitHub repo (default: extracted from $GITHUB_REPOSITORY)
-        user: ForyxCraft
+        user: FlawCra
         # Name of project on GitHub (default: extracted from $GITHUB_REPOSITORY)
-        project: ForyxLIB
+        project: FlawCraLIB
         # Limit pull requests to the release branch, such as master or release (required, default: master)
         release_branch: master
         # Output file. To print to STDOUT instead, use blank as path. (required, default: CHANGELOG.md)
