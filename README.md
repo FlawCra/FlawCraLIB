@@ -1,2 +1,2 @@
-# ForyxLIB
-![Changelog](https://github.com/ForyxCraft/ForyxLIB/workflows/Changelog/badge.svg?branch=master)
+# FlawCraLIB
+![Changelog](https://github.com/FlawCra/FlawCraLIB/workflows/Changelog/badge.svg?branch=master)
