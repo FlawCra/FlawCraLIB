@@ -1,0 +1,31 @@
+{
+  "name": "flawcralib",
+  "version": "1.0.0",
+  "description": "The official JavaScript library by Flawcra",
+  "main": "FlawCraLIB.js",
+  "scripts": {
+    "setup": "npm i && npm i -g webpack webpack-cli",
+    "build": "webpack",
+    "build-win": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlawCra/FlawCraLIB.git"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "node-polyfill-webpack-plugin": "^1.1.3"
+  },
+  "devDependencies": {
+    "path-browserify": "^1.0.1",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "author": "FlawCra",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/FlawCra/FlawCraLIB/issues"
+  },
+  "homepage": "https://github.com/FlawCra/FlawCraLIB#readme"
+}
