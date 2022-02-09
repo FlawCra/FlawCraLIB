@@ -30,6 +30,21 @@ jobs:
       - run: npm ci
       - run: npm run setup
       - run: npm run build --if-present
+      - name: Automatic Changelog Generator
+        uses: CharMixer/auto-changelog-action@v1.1
+        with:
+          # Username of the owner of target GitHub repo (default: extracted from $GITHUB_REPOSITORY)
+          user: FlawCra
+          # Name of project on GitHub (default: extracted from $GITHUB_REPOSITORY)
+          project: FlawCraLIB
+          # Limit pull requests to the release branch, such as master or release (required, default: master)
+          release_branch: master
+          # Output file. To print to STDOUT instead, use blank as path. (required, default: CHANGELOG.md)
+          output: CHANGELOG.md
+          # Optional base file to append generated changes to (default: HISTORY.md)
+          base: HISTORY.md
+          # Put the unreleased changes in the specified release number.
+          future_release: Unreleased
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
