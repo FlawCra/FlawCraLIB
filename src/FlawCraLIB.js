@@ -1,5 +1,4 @@
 var jQuery = require("jQuery");
-var $ = jQuery;
 
 var FlawCraLIB = {};
 (function (context) {
@@ -67,9 +66,9 @@ var FlawCraLIB = {};
 			elem.style.cssText = 'display:none;';
 			document.body.appendChild(elem);
 			elem.innerText = text;
-			var $temp = $("<input>");
-			$("body").append($temp);
-			$temp.val($(elem).text()).select();
+			var $temp = jQuery("<input>");
+			jQuery("body").append($temp);
+			$temp.val(jQuery(elem).text()).select();
 			document.execCommand("copy");
 			$temp.remove();
 			return;
@@ -92,3 +91,6 @@ var FlawCraLIB = {};
 		}));
 	}
 })(FlawCraLIB);
+
+module.exports += jQuery;
+module.exports += FlawCraLIB;
