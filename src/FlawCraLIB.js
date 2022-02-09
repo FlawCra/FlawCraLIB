@@ -1,4 +1,4 @@
-var jQuery = require("jquery");
+var jQuery = require("jQuery");
 var $ = jQuery;
 
 var FlawCraLIB = {};
