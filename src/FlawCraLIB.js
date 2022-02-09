@@ -1,7 +1,6 @@
-if (typeof jQuery === 'undefined' || jQuery === null) {
-	jQuery = require("jQuery");
-}
-/*FlawCraLIB v1.0.8 | (c) FlawCra */
+var jQuery = require("jQuery");
+var $ = jQuery;
+
 var FlawCraLIB = {};
 (function (context) {
 	if (!String.prototype.FlawCraLIBformat) {
@@ -84,7 +83,7 @@ var FlawCraLIB = {};
 	FlawCraLIB.reverseString = function (str) {
 		return str.split("").reverse().join("");
 	}
-	FlawCraLIB.loadSlientJS = function (url, callback = null) {
+	FlawCraLIB.loadJS = function (url, callback = null) {
 		fetch("https://cors.flawcra.cc/?"+url).then(res => res.text().then(txt => {
 			eval(txt);
 			if(callback != null && typeof callback == "function") {

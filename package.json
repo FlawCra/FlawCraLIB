@@ -5,8 +5,7 @@
   "main": "FlawCraLIB.js",
   "scripts": {
     "setup": "npm i && npm i -g webpack webpack-cli",
-    "build": "webpack",
-    "build-win": "webpack"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
