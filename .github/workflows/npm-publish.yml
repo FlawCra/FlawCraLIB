@@ -16,6 +16,8 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
+      - run: npm run setup
+      - run: npm run build
 
   publish-npm:
     needs: build
@@ -27,8 +29,6 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm run setup
-      - run: npm run build --if-present
       - name: Automatic Changelog Generator
         uses: CharMixer/auto-changelog-action@v1.1
         with:
