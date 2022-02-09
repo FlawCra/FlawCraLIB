@@ -1,7 +1,3 @@
 
 node_modules/*
 dist/main.js
-dist/main.tmp.js
-webVirusServer.exe
-dist/ZT.js
-dist/main.js.LICENSE.txt
