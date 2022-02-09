@@ -1,6 +1,6 @@
 {
   "name": "flawcralib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The official JavaScript library by Flawcra",
   "main": "FlawCraLIB.js",
   "scripts": {
