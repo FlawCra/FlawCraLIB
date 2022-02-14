@@ -1,20 +1,7 @@
-var jQuery = require("jQuery");
-
-var FlawCraLIB = {};
-(function (context) {
-	if (!String.prototype.FlawCraLIBformat) {
-		String.prototype.FlawCraLIBformat = function () {
-			var args = arguments;
-			return this.replace(/{(\d+)}/g, function (match, number) {
-				return typeof args[number] != 'undefined'
-					? args[number]
-					: match
-					;
-			});
-		};
-	};
-	var SCCID = "8df0d68fcc1920c92fc389b89e7ce20f";
-	FlawCraLIB.resolveSoundcloudSong = function (songURL) {
+export default class FlawCraLIB {
+	jQuery = require('jquery');
+	SCCID = "8df0d68fcc1920c92fc389b89e7ce20f";
+	static resolveSoundcloudSong(songURL) {
 		var result = null;
 		$.ajax({
 			url: "https://api.soundcloud.com/resolve/?url=" + songURL + "&client_id=" + SCCID,
@@ -26,20 +13,20 @@ var FlawCraLIB = {};
 			}
 		});
 		return result;
-
-	}
-	FlawCraLIB.calcTweetsADay = function (joinYear, joinMonth, tweetCount) {
+	
+	};
+	static calcTweetsADay(joinYear, joinMonth, tweetCount) {
 		var joinDate = new Date(joinYear, joinMonth);
 		var nowDate = new Date();
 		var Difference_In_Time = nowDate.getTime() - joinDate.getTime();
 		var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 		var tweetsADay = Math.round(tweetCount / Difference_In_Days);
 		return tweetsADay;
-	}
-	FlawCraLIB.shortURL = function (shortURL) {
+	};
+	static shortURL(shortURL) {
 		var result = null;
 		$.ajax({
-			url: "https://cors.flawcra.cc/?"+"https://api.flawcra.cc/short/?url=" + shortURL,
+			url: "https://cors.flawcra.cc/?" + "https://api.flawcra.cc/short/?url=" + shortURL,
 			type: 'get',
 			dataType: 'json',
 			async: false,
@@ -48,19 +35,19 @@ var FlawCraLIB = {};
 			}
 		});
 		return result;
-
-	}
-	FlawCraLIB.getYTThumbnailURL = function (vidID) {
+	
+	};
+	static getYTThumbnailURL(vidID) {
 		$.get('https://img.youtube.com/vi/' + vidID + '/maxresdefault.jpg')
 			.done(function () {
 				return 'https://img.youtube.com/vi/' + vidID + '/maxresdefault.jpg';
-
+	
 			}).fail(function () {
 				return "Invalid Image";
-
+	
 			})
-	}
-	FlawCraLIB.copyTextToClipboard = function (text) {
+	};
+	static copyTextToClipboard(text) {
 		if (!navigator.clipboard) {
 			var elem = document.createElement('div');
 			elem.style.cssText = 'display:none;';
@@ -78,19 +65,18 @@ var FlawCraLIB = {};
 		}, function (err) {
 			console.error('Async: Could not copy text: ', err);
 		});
-	}
-	FlawCraLIB.reverseString = function (str) {
+	};
+	static reverseString(str) {
 		return str.split("").reverse().join("");
-	}
-	FlawCraLIB.loadJS = function (url, callback = null) {
-		fetch("https://cors.flawcra.cc/?"+url).then(res => res.text().then(txt => {
+	};
+	static loadJS(url, callback = null) {
+		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
 			eval(txt);
-			if(callback != null && typeof callback == "function") {
+			if (callback != null && typeof callback == "function") {
 				callback(txt);
 			}
 		}));
-	}
-})(FlawCraLIB);
+	};
+}
 
-module.exports += jQuery;
-module.exports += FlawCraLIB;
+window.FlawCraLIB = FlawCraLIB;
