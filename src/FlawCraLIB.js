@@ -126,6 +126,25 @@ export default class FlawCraLIB {
 			}
 		}));
 	};
+	/**
+	 * @param  {string} name
+	 * @param  {string} url
+	 * @description Get a parameter by name from a given URL
+	 */
+	static getParameterByName(name, url) {
+		name = name.replace(/[\[\]]/g, '\\$&')
+		name = name.replace(/\//g, '')
+		var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+			results = regex.exec(url)
+	
+		if (!results) return null
+		else if (!results[2]) return ''
+		else if (results[2]) {
+			results[2] = results[2].replace(/\//g, '')
+		}
+		
+		return decodeURIComponent(results[2].replace(/\+/g, ' '));
+	};
 }
 
 window.FlawCraLIB = FlawCraLIB;
