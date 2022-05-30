@@ -120,12 +120,15 @@ export default class FlawCraLIB {
 	 */
 	static loadJS(url, callback = null) {
 		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
-			eval(txt);
-			if (callback != null && typeof callback == "function") {
-				callback(txt);
-			}
+			(function(code, cb) {
+			    eval(code);
+			    if (cb != null && typeof cb == "function") {
+				cb(code);
+			    }
+			})(txt, callback);
 		}));
 	};
+	
 	/**
 	 * @param  {string} name
 	 * @param  {string} url
