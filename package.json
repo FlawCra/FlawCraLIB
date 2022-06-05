@@ -17,9 +17,9 @@
   },
   "devDependencies": {
     "path-browserify": "^1.0.1",
-    "webpack": "^5.36.2",
-    "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^4.9.0"
+    "webpack-cli": "^4.9.2",
+    "webpack": "^5.72.1",
   },
   "author": "FlawCra",
   "license": "GPL-3.0-or-later",
