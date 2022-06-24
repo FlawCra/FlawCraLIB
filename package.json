@@ -4,8 +4,9 @@
   "description": "The official JavaScript library by Flawcra",
   "main": "src/FlawCraLIB.js",
   "scripts": {
-    "setup": "npm i && npm i -g webpack webpack-cli",
-    "build": "webpack"
+    "postinstall": "npm i -g webpack webpack-cli",
+    "build": "webpack --mode=production",
+    "dev": "webpack --mode=development"
   },
   "repository": {
     "type": "git",
