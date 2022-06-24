@@ -9,7 +9,7 @@ export default class FlawCraLIB {
 	 * @returns {string} stream URL
 	 */
 	static resolveSoundcloudSong(songURL) {
-		var result = null;
+		let result = null;
 		jQuery.ajax({
 			url: "https://api.soundcloud.com/resolve/?url=" + songURL + "&client_id=" + SCCID,
 			type: 'get',
@@ -32,11 +32,11 @@ export default class FlawCraLIB {
 	 * @returns {number} estimated tweet count
 	 */
 	static calcTweetsADay(joinYear, joinMonth, tweetCount) {
-		var joinDate = new Date(joinYear, joinMonth);
-		var nowDate = new Date();
-		var Difference_In_Time = nowDate.getTime() - joinDate.getTime();
-		var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-		var tweetsADay = Math.round(tweetCount / Difference_In_Days);
+		const joinDate = new Date(joinYear, joinMonth);
+		const nowDate = new Date();
+		const Difference_In_Time = nowDate.getTime() - joinDate.getTime();
+		const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+		const tweetsADay = Math.round(tweetCount / Difference_In_Days);
 		return tweetsADay;
 	};
 
@@ -47,7 +47,7 @@ export default class FlawCraLIB {
 	 * @returns {string} JSON response
 	 */
 	static shortURL(shortURL) {
-		var result = null;
+		let result = null;
 		jQuery.ajax({
 			url: "https://cors.flawcra.cc/?" + "https://api.flawcra.cc/short/?url=" + shortURL,
 			type: 'get',
@@ -85,11 +85,11 @@ export default class FlawCraLIB {
 	 */
 	static copyTextToClipboard(text) {
 		if (!navigator.clipboard) {
-			var elem = document.createElement('div');
+			const elem = document.createElement('div');
 			elem.style.cssText = 'display:none;';
 			document.body.appendChild(elem);
 			elem.innerText = text;
-			var $temp = jQuery("<input>");
+			const $temp = jQuery("<input>");
 			jQuery("body").append($temp);
 			$temp.val(jQuery(elem).text()).select();
 			document.execCommand("copy");
@@ -115,16 +115,33 @@ export default class FlawCraLIB {
 
 	/**
 	 * @param  {string} url
-	 * @param  {method} callback=null
+	 * @param  {function} callback=null
+	 * @description Fetch and execute a script in a safe context from a given URL and execute a callback function
+	 */
+	static loadSafeJS(url, callback = null) {
+		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
+			(function(code, cb) {
+				FlawCraLIB.safeEval(code).then(r => {
+					if (cb != null && typeof cb == "function") {
+						cb(code);
+					}
+				});
+			})(txt, callback);
+		}));
+	};
+
+	/**
+	 * @param  {string} url
+	 * @param  {function} callback=null
 	 * @description Fetch and execute a script from a given URL and execute a callback function
 	 */
 	static loadJS(url, callback = null) {
 		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
 			(function(code, cb) {
-			    eval(code);
-			    if (cb != null && typeof cb == "function") {
-				cb(code);
-			    }
+				eval(code);
+				if (cb != null && typeof cb == "function") {
+					cb(code);
+				}
 			})(txt, callback);
 		}));
 	};
@@ -137,9 +154,9 @@ export default class FlawCraLIB {
 	static getParameterByName(name, url) {
 		name = name.replace(/[\[\]]/g, '\\$&')
 		name = name.replace(/\//g, '')
-		var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-			results = regex.exec(url)
-	
+		const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+			  results = regex.exec(url);
+
 		if (!results) return null
 		else if (!results[2]) return ''
 		else if (results[2]) {
@@ -147,6 +164,80 @@ export default class FlawCraLIB {
 		}
 		
 		return decodeURIComponent(results[2].replace(/\+/g, ' '));
+	};
+
+	/**
+	 * @param {string} untrustedCode
+	 * @description Evaluate a string as JavaScript
+	 */
+	static safeEval(untrustedCode) {
+		return new Promise(function (resolve, reject)
+		{
+			const blobURL = URL.createObjectURL(new Blob([
+					"(",
+					function () {
+						const _postMessage = postMessage;
+						const _addEventListener = addEventListener;
+
+						(function (obj) {
+							"use strict";
+
+							let current = obj;
+							const keepProperties =
+								[
+									// Required
+									'Object', 'Function', 'Infinity', 'NaN', 'undefined', 'caches', 'TEMPORARY', 'PERSISTENT',
+									// Optional, but trivial to get back
+									'Array', 'Boolean', 'Number', 'String', 'Symbol',
+									// Optional
+									'Map', 'Math', 'Set',
+								];
+
+							do {
+								Object.getOwnPropertyNames(current).forEach(function (name) {
+									if (keepProperties.indexOf(name) === -1) {
+										delete current[name];
+									}
+								});
+
+								current = Object.getPrototypeOf(current);
+							}
+							while (current !== Object.prototype)
+								;
+
+						})(this);
+
+						_addEventListener("message", function (e) {
+							const f = new Function("", "return (" + e.data + "\n);");
+							_postMessage(f());
+						});
+					}.toString(),
+					")()"],
+				{type: "application/javascript"}));
+
+			const worker = new Worker(blobURL);
+
+			URL.revokeObjectURL(blobURL);
+
+			worker.onmessage = function (evt)
+			{
+				worker.terminate();
+				resolve(evt.data);
+			};
+
+			worker.onerror = function (evt)
+			{
+				reject(new Error(evt.message));
+			};
+
+			worker.postMessage(untrustedCode);
+
+			setTimeout(function ()
+			{
+				worker.terminate();
+				reject(new Error('The worker timed out.'));
+			}, 1000);
+		});
 	};
 }
 
