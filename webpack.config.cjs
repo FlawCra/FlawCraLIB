@@ -21,6 +21,11 @@ module.exports = {
       banner: `FlawCraLIB
 @author  FlawCra <office@flawcra.cc>
 @license GPL-3.0-or-later`,
+    }),
+    new webpack.BannerPlugin({
+      banner: `SHA-256 (FIPS 180-4) implementation in JavaScript
+@author  Chris Veness
+@license MIT License`,
     })
   ]
 };
