@@ -1,12 +1,14 @@
 {
   "name": "flawcralib",
+  "type": "module",
   "version": "1.0.8",
   "description": "The official JavaScript library by Flawcra",
   "main": "src/FlawCraLIB.js",
   "scripts": {
     "postinstall": "npm i -g webpack webpack-cli",
     "build": "webpack --mode=production",
-    "dev": "webpack --mode=development"
+    "dev": "webpack --mode=development",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,9 +19,10 @@
     "node-polyfill-webpack-plugin": "^1.1.4"
   },
   "devDependencies": {
+    "mocha": "^10.0.0",
     "path-browserify": "^1.0.1",
-    "webpack-cli": "^4.10.0",
     "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.3"
   },
   "author": "FlawCra",

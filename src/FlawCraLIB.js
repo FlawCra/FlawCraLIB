@@ -1,6 +1,8 @@
+import Sha256 from "./Sha256.js";
+import jQuery from "jquery";
+
 export default class FlawCraLIB {
-	jQuery = require('jquery');
-	SCCID = "8df0d68fcc1920c92fc389b89e7ce20f";
+	static soundcloudId = "8df0d68fcc1920c92fc389b89e7ce20f";
 
 	/**
 	 * @param  {string} songURL
@@ -11,12 +13,13 @@ export default class FlawCraLIB {
 	static resolveSoundcloudSong(songURL) {
 		let result = null;
 		jQuery.ajax({
-			url: "https://api.soundcloud.com/resolve/?url=" + songURL + "&client_id=" + SCCID,
+			url: "https://api.soundcloud.com/resolve/?url=" + songURL + "&client_id=" + soundcloudId,
 			type: 'get',
 			dataType: 'json',
 			async: false,
 			success: function (data) {
-				result = JSON.parse(JSON.stringify(data)).stream_url + "?client_id=" + SCCID;
+				result = JSON.parse(JSON.stringify(data)).stream_url + "?client_id=" + soundcloudId;
+				console.log(soundcloudId)
 			}
 		});
 		return result;
@@ -122,7 +125,7 @@ export default class FlawCraLIB {
 		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
 			(function(code, cb) {
 				FlawCraLIB.safeEval(code).then(r => {
-					if (cb != null && typeof cb == "function") {
+					if (cb !== null && typeof cb === "function") {
 						cb(code);
 					}
 				});
@@ -139,7 +142,7 @@ export default class FlawCraLIB {
 		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
 			(function(code, cb) {
 				eval(code);
-				if (cb != null && typeof cb == "function") {
+				if (cb !== null && typeof cb === "function") {
 					cb(code);
 				}
 			})(txt, callback);
@@ -239,6 +242,22 @@ export default class FlawCraLIB {
 			}, 1000);
 		});
 	};
+
+	/**
+	 * @param   {string} msg - (Unicode) string to be hashed.
+	 * @param   {Object} [options]
+	 * @param   {string} [options.msgFormat=string] - Message format: 'string' for JavaScript string
+	 *   (gets converted to UTF-8 for hashing); 'hex-bytes' for string of hex bytes ('616263' ≡ 'abc') .
+	 * @param   {string} [options.outFormat=hex] - Output format: 'hex' for string of contiguous
+	 *   hex bytes; 'hex-w' for grouping hex bytes into groups of (4 byte / 8 character) words.
+	 * @returns {string} Hash of msg as hex character string.
+	 * @description Generate a Sha256 of a given input
+	 * @example
+	 *   const hash = FlawCraLIB.sha256_hash('abc'); // 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'
+	 */
+	static sha256_hash(msg, options) {
+		return Sha256.hash(msg, options);
+	}
 }
 
-window.FlawCraLIB = FlawCraLIB;
+if(typeof(window) != "undefined") window.FlawCraLIB = FlawCraLIB;
