@@ -125,7 +125,7 @@ export default class FlawCraLIB {
 		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
 			(function(code, cb) {
 				FlawCraLIB.safeEval(code).then(r => {
-					if (cb != null && typeof cb == "function") {
+					if (cb !== null && typeof cb == "function") {
 						cb(code);
 					}
 				});
@@ -142,7 +142,7 @@ export default class FlawCraLIB {
 		fetch("https://cors.flawcra.cc/?" + url).then(res => res.text().then(txt => {
 			(function(code, cb) {
 				eval(code);
-				if (cb != null && typeof cb == "function") {
+				if (cb !== null && typeof cb == "function") {
 					cb(code);
 				}
 			})(txt, callback);
