@@ -269,4 +269,4 @@ export default class FlawCraLIB {
   }
 }
 
-if (typeof window != "undefined") window.FlawCraLIB = FlawCraLIB;
+if (typeof window !== "undefined") window.FlawCraLIB = FlawCraLIB;
