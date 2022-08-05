@@ -147,9 +147,9 @@ export default class FlawCraLIB {
    * @description Get a parameter by name from a given URL
    */
   static getParameterByName(name, url) {
-    name = name.replace(/[\[\]]/g, "\\$&");
-    name = name.replace(/\//g, "");
-    const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
+    let replacedName = name.replace(/[\[\]]/g, "\\$&");
+    replacedName = replacedName.replace(/\//g, "");
+    const regex = new RegExp(`[?&]${replacedName}(=([^&#]*)|&|#|$)`),
       results = regex.exec(url);
 
     if (!results) return null;
