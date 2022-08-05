@@ -13,19 +13,12 @@ export default class FlawCraLIB {
   static resolveSoundcloudSong(songURL) {
     let result = null;
     jQuery.ajax({
-      url:
-        "https://api.soundcloud.com/resolve/?url=" +
-        songURL +
-        "&client_id=" +
-        soundcloudId,
+      url: `https://api.soundcloud.com/resolve/?url=${songURL}&client_id=${soundcloudId}`,
       type: "get",
       dataType: "json",
       async: false,
       success: function (data) {
-        result =
-          JSON.parse(JSON.stringify(data)).stream_url +
-          "?client_id=" +
-          soundcloudId;
+        result = `${JSON.parse(JSON.stringify(data)).stream_url}?client_id=${soundcloudId}`;
         console.log(soundcloudId);
       },
     });
@@ -117,7 +110,7 @@ export default class FlawCraLIB {
    * @description Fetch and execute a script in a safe context from a given URL and execute a callback function
    */
   static loadSafeJS(url, callback = null) {
-    fetch("https://cors.flawcra.cc/?" + url).then((res) =>
+    fetch(`https://cors.flawcra.cc/?${url}`).then((res) =>
       res.text().then((txt) => {
         (function (code, cb) {
           FlawCraLIB.safeEval(code).then((r) => {
@@ -136,7 +129,7 @@ export default class FlawCraLIB {
    * @description Fetch and execute a script from a given URL and execute a callback function
    */
   static loadJS(url, callback = null) {
-    fetch("https://cors.flawcra.cc/?" + url).then((res) =>
+    fetch(`https://cors.flawcra.cc/?${url}`).then((res) =>
       res.text().then((txt) => {
         (function (code, cb) {
           eval(code);
@@ -156,7 +149,7 @@ export default class FlawCraLIB {
   static getParameterByName(name, url) {
     name = name.replace(/[\[\]]/g, "\\$&");
     name = name.replace(/\//g, "");
-    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
       results = regex.exec(url);
 
     if (!results) return null;
@@ -220,7 +213,7 @@ export default class FlawCraLIB {
               })(this);
 
               _addEventListener("message", function (e) {
-                const f = new Function("", "return (" + e.data + "\n);");
+                const f = new Function("", `return (${e.data}\\n);`);
                 _postMessage(f());
               });
             }.toString(),
