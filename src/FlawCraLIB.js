@@ -63,23 +63,7 @@ export default class FlawCraLIB {
 		return result;
 	
 	};
-
-	/**
-	 * @param  {string} vidID
-	 * @description Get the thumbnail URL of a YouTube video
-	 * 
-	 * @returns {string} thumbnail URL
-	 */
-	static getYTThumbnailURL(vidID) {
-		jQuery.get('https://img.youtube.com/vi/' + vidID + '/maxresdefault.jpg')
-			.done(function () {
-				return 'https://img.youtube.com/vi/' + vidID + '/maxresdefault.jpg';
 	
-			}).fail(function () {
-				return "Invalid Image";
-			});
-	};
-
 	/**
 	 * @param  {string} text
 	 * @description Copy text to clipboard
