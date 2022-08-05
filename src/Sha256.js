@@ -39,6 +39,28 @@ export default class Sha256 {
 
     // note use throughout this routine of 'n >>> 0' to coerce Number 'n' to unsigned 32-bit integer
 
+      function utf8Encode(str) {
+          try {
+              return new TextEncoder()
+                  .encode(str, "utf-8")
+                  .reduce((prev, curr) => prev + String.fromCharCode(curr), "");
+          } catch (e) {
+              // no TextEncoder available?
+              return unescape(encodeURIComponent(str)); // monsur.hossa.in/2012/07/20/utf-8-in-javascript.html
+          }
+      }
+
+      function hexBytesToString(hexStr) {
+          // convert string of hex numbers to a string of chars (eg '616263' -> 'abc').
+          const str = hexStr.replace(" ", ""); // allow space-separated groups
+          return str == ""
+              ? ""
+              : str
+                  .match(/.{2}/g)
+                  .map((byte) => String.fromCharCode(parseInt(byte, 16)))
+                  .join("");
+      }
+
     switch (opt.msgFormat) {
       default: // default is to convert string to UTF-8, as SHA only deals with byte-streams
       case "string":
@@ -157,30 +179,6 @@ export default class Sha256 {
     const separator = opt.outFormat == "hex-w" ? " " : "";
 
     return H.join(separator);
-
-    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-    function utf8Encode(str) {
-      try {
-        return new TextEncoder()
-          .encode(str, "utf-8")
-          .reduce((prev, curr) => prev + String.fromCharCode(curr), "");
-      } catch (e) {
-        // no TextEncoder available?
-        return unescape(encodeURIComponent(str)); // monsur.hossa.in/2012/07/20/utf-8-in-javascript.html
-      }
-    }
-
-    function hexBytesToString(hexStr) {
-      // convert string of hex numbers to a string of chars (eg '616263' -> 'abc').
-      const str = hexStr.replace(" ", ""); // allow space-separated groups
-      return str == ""
-        ? ""
-        : str
-            .match(/.{2}/g)
-            .map((byte) => String.fromCharCode(parseInt(byte, 16)))
-            .join("");
-    }
   }
 
   /**
