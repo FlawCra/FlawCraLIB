@@ -1,6 +1,9 @@
 import Sha256 from "./Sha256.js";
 import jQuery from "jquery";
 
+/**
+ * @description Main class of FlawCraLIB
+ */
 export default class FlawCraLIB {
   static soundcloudId = "8df0d68fcc1920c92fc389b89e7ce20f";
 
