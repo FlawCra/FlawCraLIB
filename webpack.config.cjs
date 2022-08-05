@@ -18,7 +18,7 @@ module.exports = {
         jQuery: "jquery"
     }),
     new webpack.BannerPlugin({
-      banner: `FlawCraLIB
+      banner: `FlawCraLIB v${require("./package.json").version}
 @author  FlawCra <office@flawcra.cc>
 @license GPL-3.0-or-later`,
     }),

@@ -84,9 +84,9 @@ export default class FlawCraLIB {
 	 * @param  {string} text
 	 * @description Copy text to clipboard
 	 * 
-	 * @returns {boolean} true if successful, false if not
+	 * @returns {Promise<boolean>} true if successful, false if not
 	 */
-	static copyTextToClipboard(text) {
+	static async copyTextToClipboard(text) {
 		if (!navigator.clipboard) {
 			const elem = document.createElement('div');
 			elem.style.cssText = 'display:none;';
@@ -99,7 +99,7 @@ export default class FlawCraLIB {
 			$temp.remove();
 			return true;
 		}
-		navigator.clipboard.writeText(text).then(function () {
+		return navigator.clipboard.writeText(text).then(function () {
 			return true;
 		}, function (err) {
 			return false;
