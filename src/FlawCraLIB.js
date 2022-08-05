@@ -18,7 +18,9 @@ export default class FlawCraLIB {
       dataType: "json",
       async: false,
       success: function (data) {
-        result = `${JSON.parse(JSON.stringify(data)).stream_url}?client_id=${soundcloudId}`;
+        result = `${
+          JSON.parse(JSON.stringify(data)).stream_url
+        }?client_id=${soundcloudId}`;
         console.log(soundcloudId);
       },
     });
