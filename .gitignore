@@ -3,3 +3,5 @@ node_modules/*
 dist/main.js
 dist/main.js.LICENSE.txt
 .nyc_output/
+
+package-lock.json
