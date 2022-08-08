@@ -61,7 +61,7 @@ export default class FlawCraLIB {
       $temp.remove();
       return true;
     }
-    return await navigator.clipboard.writeText(text).then(
+    return await navigator.clipboard.writeText(text).then( // skipcq: JS-0111
       function () {
         return true;
       },
