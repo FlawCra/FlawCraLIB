@@ -35,7 +35,7 @@ export default class FlawCraLIB {
       type: "get",
       dataType: "json",
       async: false,
-      success: function (data) {
+      success: (data) => {
         result = JSON.parse(JSON.stringify(data));
       },
     });
@@ -63,10 +63,10 @@ export default class FlawCraLIB {
     }
     // skipcq: JS-0111
     return await navigator.clipboard.writeText(text).then(
-      function () {
+      () => {
         return true;
       },
-      function () {
+      () => {
         return false;
       }
     );
@@ -90,7 +90,7 @@ export default class FlawCraLIB {
   static loadSafeJS(url, callback = null) {
     fetch(`https://cors.flawcra.cc/?${url}`).then((res) =>
       res.text().then((txt) => {
-        (function (code, cb) {
+        ((code, cb) => {
           FlawCraLIB.safeEval(code).then(() => {
             if (cb !== null && typeof cb === "function") {
               cb(code);
@@ -126,16 +126,16 @@ export default class FlawCraLIB {
    * @description Evaluate a string as JavaScript
    */
   static safeEval(untrustedCode) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       const blobURL = URL.createObjectURL(
         new Blob(
           [
             "(",
-            function () {
+            (() => {
               const _postMessage = postMessage;
               const _addEventListener = addEventListener;
 
-              (function (obj) {
+              ((obj) => {
                 let current = obj;
                 const keepProperties = [
                   // Required
@@ -160,7 +160,7 @@ export default class FlawCraLIB {
                 ];
 
                 do {
-                  Object.getOwnPropertyNames(current).forEach(function (name) {
+                  Object.getOwnPropertyNames(current).forEach((name) => {
                     if (keepProperties.indexOf(name) === -1) {
                       delete current[name];
                     }
@@ -170,11 +170,11 @@ export default class FlawCraLIB {
                 } while (current !== Object.prototype);
               })(this);
 
-              _addEventListener("message", function (e) {
+              _addEventListener("message", (e) => {
                 const func = new Function("", `return (${e.data}\\n);`);
                 _postMessage(func());
               });
-            }.toString(),
+            }).toString(),
             ")()",
           ],
           { type: "application/javascript" }
@@ -185,18 +185,18 @@ export default class FlawCraLIB {
 
       URL.revokeObjectURL(blobURL);
 
-      worker.onmessage = function (evt) {
+      worker.onmessage = (evt) => {
         worker.terminate();
         resolve(evt.data);
       };
 
-      worker.onerror = function (evt) {
+      worker.onerror = (evt) => {
         reject(new Error(evt.message));
       };
 
       worker.postMessage(untrustedCode);
 
-      setTimeout(function () {
+      setTimeout(() => {
         worker.terminate();
         reject(new Error("The worker timed out."));
       }, 1000);
