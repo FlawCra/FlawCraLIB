@@ -32,9 +32,7 @@ export default class FlawCraLIB {
     let result = null;
     jQuery.ajax({
       url:
-        "https://cors.flawcra.cc/?" +
-        "https://api.flawcra.cc/short/?url=" +
-        shortURL,
+        `https://cors.flawcra.cc/?https://api.flawcra.cc/short/?url=${shortURL}`,
       type: "get",
       dataType: "json",
       async: false,
