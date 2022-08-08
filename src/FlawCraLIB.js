@@ -104,24 +104,6 @@ export default class FlawCraLIB {
   }
 
   /**
-   * @param  {string} url
-   * @param  {function} callback=null
-   * @description Fetch and execute a script from a given URL and execute a callback function
-   */
-  static loadJS(url, callback = null) {
-    fetch(`https://cors.flawcra.cc/?${url}`).then((res) =>
-      res.text().then((txt) => {
-        (function (code, cb) {
-          eval(code);
-          if (cb !== null && typeof cb === "function") {
-            cb(code);
-          }
-        })(txt, callback);
-      })
-    );
-  }
-
-  /**
    * @param  {string} name
    * @param  {string} url
    * @description Get a parameter by name from a given URL
