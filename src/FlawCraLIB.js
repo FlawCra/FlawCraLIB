@@ -64,7 +64,7 @@ export default class FlawCraLIB {
       $temp.remove();
       return true;
     }
-    return navigator.clipboard.writeText(text).then(
+    return await navigator.clipboard.writeText(text).then(
       function () {
         return true;
       },
