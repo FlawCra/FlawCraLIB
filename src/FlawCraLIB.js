@@ -68,7 +68,7 @@ export default class FlawCraLIB {
       function () {
         return true;
       },
-      function (err) {
+      function () {
         return false;
       }
     );
@@ -93,7 +93,7 @@ export default class FlawCraLIB {
     fetch(`https://cors.flawcra.cc/?${url}`).then((res) =>
       res.text().then((txt) => {
         (function (code, cb) {
-          FlawCraLIB.safeEval(code).then((r) => {
+          FlawCraLIB.safeEval(code).then(() => {
             if (cb !== null && typeof cb === "function") {
               cb(code);
             }
