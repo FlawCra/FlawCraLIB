@@ -138,8 +138,6 @@ export default class FlawCraLIB {
               const _addEventListener = addEventListener;
 
               (function (obj) {
-                "use strict";
-
                 let current = obj;
                 const keepProperties = [
                   // Required
