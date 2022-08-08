@@ -173,8 +173,8 @@ export default class FlawCraLIB {
               })(this);
 
               _addEventListener("message", function (e) {
-                const f = new Function("", `return (${e.data}\\n);`);
-                _postMessage(f());
+                const func = new Function("", `return (${e.data}\\n);`);
+                _postMessage(func());
               });
             }.toString(),
             ")()",
