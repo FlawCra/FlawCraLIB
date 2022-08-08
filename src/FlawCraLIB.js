@@ -5,31 +5,6 @@ import jQuery from "jquery";
  * @description Main class of FlawCraLIB
  */
 export default class FlawCraLIB {
-  static soundcloudId = "8df0d68fcc1920c92fc389b89e7ce20f";
-
-  /**
-   * @param  {string} songURL
-   * @description Get the stream URL of a Soundcloud song
-   *
-   * @returns {string} stream URL
-   */
-  static resolveSoundcloudSong(songURL) {
-    let result = null;
-    jQuery.ajax({
-      url: `https://api.soundcloud.com/resolve/?url=${songURL}&client_id=${soundcloudId}`,
-      type: "get",
-      dataType: "json",
-      async: false,
-      success: function (data) {
-        result = `${
-          JSON.parse(JSON.stringify(data)).stream_url
-        }?client_id=${soundcloudId}`;
-        console.log(soundcloudId);
-      },
-    });
-    return result;
-  }
-
   /**
    * @param  {number} joinYear
    * @param  {number} joinMonth
