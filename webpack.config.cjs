@@ -1,21 +1,21 @@
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
-const webpack = require('webpack');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    main: './src/FlawCraLIB.js',
+    main: "./src/FlawCraLIB.js",
   },
   output: {
-    filename: '[name].js',
-    path: __dirname + '/dist',
-    libraryTarget: 'umd',
-    libraryExport: 'default'
+    filename: "[name].js",
+    path: __dirname + "/dist",
+    libraryTarget: "umd",
+    libraryExport: "default",
   },
   plugins: [
     new NodePolyfillPlugin(),
     new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
+      $: "jquery",
+      jQuery: "jquery",
     }),
     new webpack.BannerPlugin({
       banner: `FlawCraLIB v${require("./package.json").version}
@@ -26,6 +26,6 @@ module.exports = {
       banner: `SHA-256 (FIPS 180-4) implementation in JavaScript
 @author  Chris Veness
 @license MIT License`,
-    })
-  ]
+    }),
+  ],
 };
