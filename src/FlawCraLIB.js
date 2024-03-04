@@ -68,7 +68,7 @@ export default class FlawCraLIB {
       },
       () => {
         return false;
-      }
+      },
     );
   }
 
@@ -97,7 +97,7 @@ export default class FlawCraLIB {
             }
           });
         })(txt, callback);
-      })
+      }),
     );
   }
 
@@ -177,8 +177,8 @@ export default class FlawCraLIB {
             }).toString(),
             ")()",
           ],
-          { type: "application/javascript" }
-        )
+          { type: "application/javascript" },
+        ),
       );
 
       const worker = new Worker(blobURL);
